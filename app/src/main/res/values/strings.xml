@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyPlace</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_select_location">Map</string>
+    <string name="myplace_tab_nearby">Nearby</string>
+    <string name="myplace_tab_favorite">Favorite</string>
+</resources>

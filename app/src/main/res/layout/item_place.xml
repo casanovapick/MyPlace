@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="placeItem"
+            type="com.example.picked.myplace.ui.place.PlaceItem" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="110dp"
+                    android:layout_height="60dp"
+                    app:imageUrl="@{placeItem.imageUrl}"
+                    tools:src="@drawable/common_google_signin_btn_icon_dark" />
+
+                <TextView
+                    android:id="@+id/placeAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:lines="2"
+                    android:text='@{placeItem.placeInfo.name+"\n"+placeItem.placeInfo.vicinity}'
+                    tools:text="Ratchada" />
+
+                <ImageView
+                    android:id="@+id/favoriteButton"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="8dp"
+                    android:adjustViewBounds="false"
+                    android:src="@{placeItem.favorite ? @drawable/icon_favorite_active :@drawable/icon_favorite}"
+                    tools:src="@drawable/icon_favorite_active" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</layout>
