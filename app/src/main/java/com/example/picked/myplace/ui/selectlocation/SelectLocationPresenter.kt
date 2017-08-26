@@ -11,8 +11,8 @@ import io.reactivex.schedulers.Schedulers
 
 
 class SelectLocationPresenter(view: SelectLocationContract.View?
-                              , val addressService: AddressService
-                              , val viewModel: SelectLocationViewModel)
+                              , private val addressService: AddressService
+                              , private val viewModel: SelectLocationViewModel)
     : BasePresenter<SelectLocationContract.View>(view), SelectLocationContract.Action {
 
     override fun selectAddress() {

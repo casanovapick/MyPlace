@@ -29,10 +29,10 @@ import permissions.dispatcher.RuntimePermissions
 class SelectLocationActivity : LifecycleActivity(), OnMapReadyCallback
         , GoogleApiClient.ConnectionCallbacks, LocationListener, SelectLocationContract.View {
 
-    lateinit var googleApiClient: GoogleApiClient
-    lateinit var map: GoogleMap
-    lateinit var viewModel: SelectLocationViewModel
-    lateinit var presenter: SelectLocationPresenter
+    private lateinit var googleApiClient: GoogleApiClient
+    private lateinit var map: GoogleMap
+    private lateinit var viewModel: SelectLocationViewModel
+    private lateinit var presenter: SelectLocationPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

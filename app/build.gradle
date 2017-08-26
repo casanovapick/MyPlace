@@ -35,6 +35,11 @@ dependencies {
     //Unit test
     testCompile "org.mockito:mockito-core:2.8.9"
     testCompile 'junit:junit:4.12'
+    testCompile("android.arch.core:core-testing:$archLifecycle_version", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
     //Android test
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
