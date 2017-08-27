@@ -14,37 +14,31 @@ class MyPlacePagerAdapter(val context: Context, fm: FragmentManager?) : Fragment
     private val NEARBY_POSITION = 0
     private val FAVORITE_POSITION = 1
 
-    override fun getItem(position: Int): Fragment {
-        when (position) {
-            NEARBY_POSITION -> {
-                return NearbyFragment()
-            }
-            FAVORITE_POSITION -> {
-                return FavoriteFragment()
-            }
-            else -> {
-                return NearbyFragment()
-            }
+    override fun getItem(position: Int): Fragment = when (position) {
+        NEARBY_POSITION -> {
+            NearbyFragment()
+        }
+        FAVORITE_POSITION -> {
+            FavoriteFragment()
+        }
+        else -> {
+            NearbyFragment()
         }
     }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        when (position) {
-            NEARBY_POSITION -> {
-                return context.getString(R.string.myplace_tab_nearby)
-            }
-            FAVORITE_POSITION -> {
-                return context.getString(R.string.myplace_tab_favorite)
-            }
-            else -> {
-                return ""
-            }
+    override fun getPageTitle(position: Int): CharSequence = when (position) {
+        NEARBY_POSITION -> {
+            context.getString(R.string.myplace_tab_nearby)
+        }
+        FAVORITE_POSITION -> {
+            context.getString(R.string.myplace_tab_favorite)
+        }
+        else -> {
+            ""
         }
     }
 
-    override fun getCount(): Int {
-        return NUMBER_OF_PAGE;
-    }
+    override fun getCount(): Int = NUMBER_OF_PAGE
 
 
 }

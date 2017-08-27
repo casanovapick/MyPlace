@@ -12,11 +12,9 @@ class GeoCoderAddressService(context: Context) : AddressService {
 
     private val geoCoder: Geocoder = Geocoder(context, Locale.getDefault())
 
-    override fun getAddress(latLng: LatLng): Observable<Address> {
-        return Observable.fromCallable {
-            val addressList = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-            addressList[0]
-        }
+    override fun getAddress(latLng: LatLng): Observable<Address> = Observable.fromCallable {
+        val addressList = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+        addressList[0]
     }
 
 }

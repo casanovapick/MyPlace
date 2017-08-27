@@ -13,6 +13,6 @@ abstract class BasePresenter<T : MvpView>(protected var view: T?) : LifecycleObs
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun stop() {
         compositeDisposable.dispose()
-        view = null;
+        view = null
     }
 }

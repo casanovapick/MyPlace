@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.picked.myplace.R
+import com.example.picked.myplace.geofencing.MyPlaceGeoFencing
 import com.example.picked.myplace.repository.FavoritePlaceRepository
 import com.example.picked.myplace.ui.place.PlaceListAdapter
 import kotlinx.android.synthetic.main.fragment_favorite.*
@@ -20,14 +21,13 @@ class FavoriteFragment : LifecycleFragment(), FavoriteContract.View {
     private lateinit var adapter: PlaceListAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_favorite, container, false)
-    }
+                              savedInstanceState: Bundle?): View? =
+            inflater!!.inflate(R.layout.fragment_favorite, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(FavoriteViewModel::class.java)
-        presenter = FavoritePresenter(this, FavoritePlaceRepository(), viewModel)
+        presenter = FavoritePresenter(this, FavoritePlaceRepository(), viewModel, MyPlaceGeoFencing(context))
         adapter = PlaceListAdapter(viewModel.placeItemList, {
             presenter?.unFavorite(it)
         })
@@ -42,7 +42,5 @@ class FavoriteFragment : LifecycleFragment(), FavoriteContract.View {
         }
     }
 
-    override fun updateList() {
-        adapter.notifyDataSetChanged()
-    }
+    override fun updateList() = adapter.notifyDataSetChanged()
 }

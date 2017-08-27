@@ -9,7 +9,7 @@ import com.example.picked.myplace.R
 import com.example.picked.myplace.binding.BindingHolder
 import kotlinx.android.synthetic.main.item_place.view.*
 
-class PlaceListAdapter(var placeItem: MutableList<PlaceItem>, val favoriteClick: ((Int) -> Unit)) : RecyclerView.Adapter<PlaceListAdapter.PlaceItemViewHolder>() {
+class PlaceListAdapter(var placeItem: MutableList<PlaceItem>, private val favoriteClick: ((Int) -> Unit)) : RecyclerView.Adapter<PlaceListAdapter.PlaceItemViewHolder>() {
 
 
     override fun onBindViewHolder(holder: PlaceItemViewHolder?, position: Int) {
@@ -23,7 +23,7 @@ class PlaceListAdapter(var placeItem: MutableList<PlaceItem>, val favoriteClick:
         return PlaceItemViewHolder(view, favoriteClick)
     }
 
-    class PlaceItemViewHolder(itemView: View, val favoriteClick: ((Int) -> Unit)) : BindingHolder(itemView) {
+    class PlaceItemViewHolder(itemView: View, private val favoriteClick: ((Int) -> Unit)) : BindingHolder(itemView) {
         fun bind(placeItem: PlaceItem, position: Int) {
             binder.setVariable(BR.placeItem, placeItem)
             binder.executePendingBindings()

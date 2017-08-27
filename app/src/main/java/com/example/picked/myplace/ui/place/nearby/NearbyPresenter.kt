@@ -1,6 +1,7 @@
 package com.example.picked.myplace.ui.place.nearby
 
 import android.util.Log
+import com.example.picked.myplace.geofencing.PlaceGeoFencing
 import com.example.picked.myplace.mvp.BasePresenter
 import com.example.picked.myplace.repository.PlaceRepository
 import com.example.picked.myplace.service.place.PlaceSearchService
@@ -11,8 +12,11 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
 
-class NearbyPresenter(view: NearbyContract.View, val placeSearchService: PlaceSearchService
-                      , val viewModel: NearbyViewModel, val placeRepository: PlaceRepository)
+class NearbyPresenter(view: NearbyContract.View
+                      , private val placeSearchService: PlaceSearchService
+                      , private val viewModel: NearbyViewModel
+                      , private val placeRepository: PlaceRepository
+                      , private val placeGeoFencing: PlaceGeoFencing)
     : BasePresenter<NearbyContract.View>(view), NearbyContract.Action {
 
     override fun changeFavorite(position: Int) {
@@ -21,8 +25,12 @@ class NearbyPresenter(view: NearbyContract.View, val placeSearchService: PlaceSe
         view?.updateList()
         if (placeListItem.isFavorite) {
             placeRepository.addPlace(placeListItem.placeInfo)
+            placeGeoFencing.addPlace(placeListItem.placeInfo)
         } else {
-            placeListItem.placeInfo.id?.let { placeRepository.deletePlace(it) }
+            placeListItem.placeInfo.id?.let {
+                placeRepository.deletePlace(it)
+                placeGeoFencing.removePlace(placeListItem.placeInfo)
+            }
         }
     }
 

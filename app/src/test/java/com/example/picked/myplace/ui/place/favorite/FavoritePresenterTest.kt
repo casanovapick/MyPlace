@@ -1,6 +1,7 @@
 package com.example.picked.myplace.ui.place.favorite
 
 import com.example.picked.myplace.entity.place.PlaceInfo
+import com.example.picked.myplace.geofencing.PlaceGeoFencing
 import com.example.picked.myplace.repository.PlaceRepository
 import com.example.picked.myplace.ui.place.PlaceItem
 import org.junit.Before
@@ -19,20 +20,24 @@ class FavoritePresenterTest {
 
     @Mock lateinit var repository: PlaceRepository
 
+    @Mock lateinit var placeGeoFencing:PlaceGeoFencing
+
     private val viewModel: FavoriteViewModel = FavoriteViewModel()
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = FavoritePresenter(view, repository, viewModel)
+        presenter = FavoritePresenter(view, repository, viewModel, placeGeoFencing)
     }
 
     @Test
     fun unFavorite() {
         val id = "AAAA"
-        viewModel.placeItemList.add(PlaceItem(PlaceInfo(id = id), true))
+        val placeInfo = PlaceInfo(id = id)
+        viewModel.placeItemList.add(PlaceItem(placeInfo, true))
         presenter.unFavorite(0)
         verify(repository).deletePlace(id)
+        verify(placeGeoFencing).removePlace(placeInfo)
     }
 
     @Test
